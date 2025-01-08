@@ -1,0 +1,161 @@
+/* Reset margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and border are included in the width and height */
+}
+
+/* Body styles */
+body {
+  display: flex;
+  justify-content: center; /* Center the coupon container horizontally */
+  align-items: center; /* Center the coupon container vertically */
+  height: 100vh; /* Full viewport height */
+  background-color: purple; /* Set the background color to purple */
+  overflow: hidden;
+}
+
+/* Coupon container styles */
+.coupon-container {
+  position: relative; /* Allows absolute positioning of child elements */
+  width: 750px; /* Fixed width of the coupon */
+  height: 722px; /* Fixed height of the coupon */
+  border-radius: 15px; /* Rounded corners */
+  overflow: hidden; /* Ensures child elements don't overflow the container */
+}
+
+/* Coupon image styles */
+.coupon-image {
+  position: absolute; /* Absolute positioning to fill the container */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  object-fit: cover; /* Ensures the image covers the entire area */
+}
+
+/* Amount text styles */
+.amount {
+  position: absolute; /* Allows for precise positioning */
+  top: 318px; /* Adjusts from the top  the correct pixel is 310 set it to 310*/ 
+  left: 522px; /* Adjusts from the left 518*/
+  font-size: 25px; /* Fixed font size 34*/
+  color: black; /* Text color */
+  font-family: 'Arial', sans-serif; /* Set a clear font family */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Optional: adds a subtle shadow for better contrast */
+  z-index: 2;
+}
+
+/* Expiration date styles */
+.expiration-date {
+  position: absolute; /* Allows for precise positioning */
+  top: 411px; /*original top is 420 px*/
+  left: 499px; /* Adjusts from the left 495*/
+  font-size: 20px; /* Fixed font size 25px*/
+  color: black; /* Text color */
+  font-family: 'Arial', sans-serif; /* Set a clear font family */
+  z-index: 2;
+
+  /*the new idea below*/
+
+
+}
+
+/* Barcode styles */
+.barcode {
+  position: absolute; /* Allows for precise positioning */
+  top: 460px; /*the orignial top should be 475 px*/
+  left: 435px; /* Adjusts from the left */
+  text-align: center; /* Center the barcode within the container */
+}
+
+/* Home display button styles */
+.home-display {
+
+position: absolute; /* Allows positioning of the container */
+top: 20px; /* Distance from the top */
+left: 20px; /* Distance from the right */
+display: flex; /* Use flexbox for horizontal alignment */
+align-items: center; /* Center items vertically */
+
+
+
+/*add this line and delete the lines above*/
+/*position: relative; /* Ensure the element can be positioned */
+z-index: 10; /* Set a high z-index to bring it to the front */
+background-color: #007BFF; /* Button background color */
+color: white; /* Text color */
+padding: 10px 20px; /* Padding for the button */
+text-decoration: none; /* Remove underline */
+border-radius: 5px; /* Rounded corners */
+font-size: 16px; /* Font size */
+display: inline-block; /* Display as an inline-block element */
+text-align: center; /* Center the text */
+}
+
+.home-display:hover {
+background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Email input and send button container styles */
+.email-container {
+position: absolute; /* Allows positioning of the container */
+top: 20px; /* Distance from the top */
+right: 20px; /* Distance from the right */
+/*background-color: rgba(255, 255, 255, 0.9); /* Light background for visibility */
+background-color:  rgb(167, 11, 167); /*the whole field color*/
+padding: 10px; /* Padding for the container */
+border-radius: 5px; /* Rounded corners */
+display: flex; /* Use flexbox for horizontal alignment */
+align-items: center; /* Center items vertically */
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+width: 356px;
+
+}
+
+/* Shortened label styles */
+.email-container label {
+margin-right: 5px; /* Space between label and input */
+font-size: 18px; /* Font size for label */
+color: #333; /* Dark text color for the label */
+}
+
+/* Email input field styles */
+#email {
+padding: 8px; /* Padding for the input */
+border: 2px solid #007BFF; /* Light blue border */
+border-radius: 5px; /* Rounded corners */
+background-color: #fff; /* White background for input */
+color: #333; /* Dark text color */
+margin-right: 5px; /* Space between input and button */
+font-size: 14px; /* Font size */
+transition: border-color 0.3s; /* Smooth transition for focus effect */
+}
+
+/* Focus effect for the email input */
+#email:focus {
+outline: none; /* Remove default outline */
+border-color: #0056b3; /* Darker blue border on focus */
+}
+
+/* Send button styles */
+.email-container button {
+background-color: #007BFF; /* Light blue background */
+color: white; /* White text color */
+border: none; /* No border */
+padding: 8px 12px; /* Padding for the button */
+border-radius: 5px; /* Rounded corners */
+font-size: 14px; /* Font size */
+cursor: pointer; /* Pointer cursor on hover */
+transition: background-color 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Hover and focus effect for the send button */
+.email-container button:hover {
+background-color: #0056b3; /* Darker blue on hover */
+}
+
+.email-container button:focus {
+outline: none; /* Remove default outline */
+box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow for focus */
+}

@@ -1,0 +1,87 @@
+/* style.css */
+body {
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #2a2a2a;
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #f39c12;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+th {
+    background-color: #333;
+    color: #f39c12;
+}
+
+tr:hover {
+    background-color: #444;
+}
+
+tr:nth-child(even) {
+    background-color: #3a3a3a;
+}
+
+tr:nth-child(odd) {
+    background-color: #2a2a2a;
+}
+
+td {
+    color: #e0e0e0;
+}
+
+td[colspan="4"] {
+    text-align: center;
+    color: #f39c12;
+}
+
+
+.dashTOhome {
+    display: inline-block; /* Makes the link behave like a button */
+    background-color: #ffcc00; /* Batman yellow */
+    color: #1a1a1a; /* Dark text color */
+    padding: 5px 10px; /* Adjusted padding for a smaller button */
+    border-radius: 4px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 12px; /* Smaller font size */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+   
+}
+
+/* Hover effects for the link */
+.dashTOhome:hover {
+    background-color: #e6b800; /* Darker yellow on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+/* Optional: Adding focus styles for accessibility */
+.dashTOhome:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px #00ff00; /* Green glow for focus */
+}

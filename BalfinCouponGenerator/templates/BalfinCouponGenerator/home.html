@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Coupon</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div class="container">
+        <div class="create-coupon">
+            <h1>Create a New Coupon</h1>
+            <form action="{% url 'create_coupon' %}" method="post"> <!-- URL for creating a coupon -->
+                {% csrf_token %}
+                <label for="amount">Enter Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                <label for="startDate">Enter Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
+                <button type="submit">Create Coupon</button>
+            </form>
+
+            {% if error_message %}
+                <p>{{ error_message }}</p>
+            {% endif %}
+        </div>
+
+        <div class="manage-coupons">
+            <h1>Manage Coupons</h1>
+            <form action="{% url 'search_coupon' %}" method="get"> <!-- URL for searching coupons -->
+                <input type="text" name="query" placeholder="Search Coupons">
+                <button type="submit">Search</button>
+            </form>
+
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+            {% if coupon %}
+                <p><strong>Amount:</strong> {{ amount }}</p>
+                <p><strong>Expiration Date:</strong> {{ expiration_date }}</p>
+                <img src="data:image/png;base64,{{ barcode_img }}" alt="Barcode" class="barcode-img">
+            {% endif %}
+        </div>
+
+        <div class="activate-coupon">
+            <h1>Activate Coupon</h1>
+            <form action="{% url 'activate_coupon' %}" method="post"> <!-- URL for activating a coupon -->
+                {% csrf_token %}
+                <label for="couponCode">Enter Coupon Code:</label>
+                <input type="text" id="couponCode" name="coupon_code" required>
+                <button type="submit">Activate</button>
+            </form>
+        </div>
+    </div>
+    <!--name of the path is called in the href url tag-->
+    <a href="{% url 'dashboard' %}" class="homeTOdash">Go to Dashboard</a>
+</body>
+</html><!--CTRl z to go to previous html along with deletion of activate couponf functions and paths -->

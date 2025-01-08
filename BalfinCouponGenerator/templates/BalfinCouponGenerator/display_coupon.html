@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupon</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'display.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <!-- Include html2canvas library for taking screenshots -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+  <a href="{% url 'home' %}" class="home-display">Go to Home</a>
+  <div class="coupon-container" id="coupon">
+    <!--latest update 11/21/2024 removed the go home button from inside the coupon container div to the body part -->
+    
+    <img src="{% static 'BalfinCoupon.jpeg' %}" alt="Coupon Background" class="coupon-image">
+    <div class="amount">{{ amount }}</div>
+    <div class="expiration-date">{{ expiration_date }}</div>
+    <div class="barcode">
+      <img src="data:image/png;base64,{{ barcode_img }}" alt="Barcode" width="250px" height="150px" style="border-radius: 15px;">
+    </div>
+  </div>
+  
+  <!-- Email form for sending the coupon screenshot -->
+  <div  class="email-container">
+    <label for="email">Send Coupon to Email: </label>
+    <input type="email" id="email" placeholder="example@example.com" required>
+    <button onclick="sendCoupon()">Send</button>
+  </div>
+
+  <script>
+    // Function to capture a specific area of the coupon container
+    function captureCoupon() {
+        //bring back line below       
+      //const coupon = document.getElementById('coupon');
+      
+      // Specify the screenshot area (adjust coordinates as needed)
+      const options = {
+        x: 408,  // Starting x-coordinate (capture from the top-left corner)
+        y: 101,  // Starting y-coordinate (capture from the top-left corner)
+        width: 730, // Full width of the coupon container
+        height: 580, // Full height of the coupon container
+        scale: window.devicePixelRatio || 1,
+        useCORS: true
+      };
+      
+      console.log("Starting to capture the coupon image...");
+      //replace document.body with coupon
+      // latest 20/11/2024  in return html2canvas i replace parameter[ document.body,] with  document.documentElement
+      return html2canvas(document.body, options).then(canvas => {
+        const imageData = canvas.toDataURL('image/png');
+        console.log("Captured image data:", imageData);  // Log the base64 image data
+        return imageData;
+      }).catch(error => {
+        console.error("Error capturing the coupon:", error);  // Log any errors from html2canvas
+      });
+    }
+  
+    // Function to send the captured screenshot via email
+    function sendCoupon() {
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      
+      console.log("Sending coupon to email:", email);
+  
+      captureCoupon().then(imageData => {
+        if (!imageData) {
+          console.error("No image data captured.");  // If no image data was captured
+          alert('Failed to capture the coupon image. Please try again.');
+          return;
+        }
+  
+        console.log("Sending POST request to /send-coupon with image data...");
+  
+        fetch('/send-coupon/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF protection for Django
+          },
+          body: JSON.stringify({
+            email: email,
+            image: imageData  // Send base64-encoded image
+          })
+        }).then(response => {
+          console.log("Response status:", response.status);
+          if (response.ok) {
+            alert('Coupon sent successfully!');
+          } else {
+            alert('Failed to send the coupon. Please try again.');
+          }
+        }).catch(error => {
+          console.error('Error sending coupon:', error);
+          alert('An error occurred. Please try again.');
+        });
+      });
+    }
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coupon Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dash.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Coupon Dashboard</h1>
+        
+        <a href="{% url 'home' %}" class="dashTOhome">Go to Home</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Coupon</th>
+                    <th>Amount</th>
+                    <th>Expiration Date</th>
+                    <th>Status</th>
+                    <th>Used or not</th>
+                    
+                    <th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coupon in coupons %}
+                    <tr>
+                        <td>{{ coupon.barcode }}</td>
+                        <td>{{ coupon.amount }}</td>
+                        <td>{{ coupon.expiration_date }}</td>
+                        <td>{{ coupon.is_active }}</td>
+                        <td>{{ coupon.is_used }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No coupons available</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
